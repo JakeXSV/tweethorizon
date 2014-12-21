@@ -15,7 +15,10 @@
     "debug": "~2.0.0",
     "ejs": "*",
     "caminte": "*",
-    "TwitterJSClient": "BoyCook/TwitterJSClient",
+    "twitter-js-client": "https://github.com/BoyCook/TwitterJSClient/tarball/master",
     "prettyjson": "*"
+  },
+  "engines": {
+    "node": "*"
   }
 }
