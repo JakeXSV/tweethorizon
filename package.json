@@ -15,8 +15,7 @@
     "debug": "~2.0.0",
     "ejs": "*",
     "caminte": "*",
-    "twitter-js-client": "https://github.com/BoyCook/TwitterJSClient/tarball/master",
-    "prettyjson": "*"
+    "TwitterJSClient": "https://github.com/BoyCook/TwitterJSClient/tarball/master"
   },
   "engines": {
     "node": "*"
