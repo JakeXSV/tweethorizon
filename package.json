@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node tweethorizon.js"
+    "start": "node tweethorizon.js",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "express": "~4.9.0",
