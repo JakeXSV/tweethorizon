@@ -9,9 +9,9 @@ require(
 
             // Initialize store and bind models to view
             var modelStore = new ModelStore();
-            bindModelXToElement(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "A");
-            bindModelXToElement(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "B");
-            function bindModelXToElement(elementIds, X){
+            bindElementsToModel(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "A");
+            bindElementsToModel(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "B");
+            function bindElementsToModel(elementIds, X){
                 elementIds.forEach(function(e){
                     rivets.bind($('#' + e)[0], {data: modelStore.shelf[X]});
                 });
