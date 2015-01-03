@@ -360,3 +360,7 @@ body.IE7 .Switch.Round { width: 1px; }
 
 .Switch.Round.On .Toggle { left: 3%; background: #33d2da; }
 .Switch.Round.Off .Toggle { left: 58%; }
+
+.invis {
+  display: none;
+}

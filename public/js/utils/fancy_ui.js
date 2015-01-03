@@ -16,20 +16,5 @@ define(function () {
         $(this.pictureSelector).css("opacity","0");
     };
 
-    FancyUI.prototype.startLoader = function(){
-        $(this.loaderSelector)[0].innerHTML = '<div class="square" ></div><div class="square"></div><div class="square last"></div><div class="square clear"></div><div class="square"></div><div class="square last"></div><div class="square clear"></div><div class="square "></div><div class="square last"></div></div>';
-    };
-
-    FancyUI.prototype.stopLoader = function(){
-        $(this.loaderSelector)[0].innerHTML = '';
-    };
-
-    FancyUI.prototype.linkToView = function(loaderElementId, pictureElementId){
-        this.loaderId = loaderElementId;
-        this.loaderSelector = '#' + this.loaderId;
-        this.pictureId = pictureElementId;
-        this.pictureSelector = '#' + this.pictureId;
-    };
-
     return FancyUI;
 });

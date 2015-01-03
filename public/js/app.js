@@ -1,30 +1,38 @@
-require(['../lib/jquery/dist/jquery.js'], function(jQuery){ //global level, app level dep
-    require([
-        '../js/controllers/switch.js',
-        '../js/widgets/manager.js'
-    ], function(SwitchController, WidgetManager) {
+require(
+    [
+        '../lib/jquery/dist/jquery.min'
+    ], function(jquery)
+    {
+        require([
+            '../js/store/store'
+        ], function(ModelStore) {
 
-        var widgetManager = new WidgetManager();
-        var linksToView = {
-            'inputController': {
-                'inputRowId': 'inputRow'
-            },
-            'resultsController': {
-                'followersRowId': 'followersRow',
-                'retweetsRowId': 'retweetsRow',
-                'favoritesRowId': 'favoritesRow',
-                'horizonRowId': 'horizonRow'
-            },
-            'switchController': {
-                'switchId': 'mainSwitch'
+            // Initialize store and bind models to view
+            var modelStore = new ModelStore();
+            bindModelXToElement(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "A");
+            bindModelXToElement(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "B");
+            function bindModelXToElement(elementIds, X){
+                elementIds.forEach(function(e){
+                    rivets.bind($('#' + e)[0], {data: modelStore.shelf[X]});
+                });
             }
-        };
 
-        // Default have one calc
-        widgetManager.createHorizonCalcWidget(linksToView);
-
-        // Switch controller watches toggle switch and creates/deletes widgets as needed
-        var switchController = new SwitchController(linksToView, widgetManager);
-
-    });
-});
+            // Get horizon data when finishing input
+            watcher('#handleInputA', "A");
+            watcher('#handleInputB', "B");
+            function watcher(selector, userId){
+                var typingTimer;
+                var doneTypingInterval = 500;
+                $(selector).keyup(function(){
+                    clearTimeout(typingTimer);
+                    if ($(selector).val) {
+                        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                    }
+                });
+                function doneTyping () {
+                    modelStore.getHandleData(userId);
+                }
+            }
+        });
+    }
+);

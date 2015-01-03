@@ -8,6 +8,7 @@
   "dependencies": {
     "jquery": null,
     "skeleton": null,
-    "requirejs": null
+    "requirejs": null,
+    "rivets": null
   }
 }
