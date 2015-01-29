@@ -1,25 +1,11 @@
-define(function () {
+define('modelStore', ['jquery', 'userModel'], function ($, getUserModel) {
+
     function ModelStore(){
-        var self = this;
         this.getProfilePictureEndpoint = '/horizon/profile/image/';
         this.getHorizonScoreEndpoint = '/horizon/score/';
-        this.getEmptyModel = function(){
-            return {
-                handle: undefined,
-                imagePath: undefined,
-                followers: undefined,
-                retweets: undefined,
-                favorites: undefined,
-                score: undefined,
-                rank: undefined,
-                isLoading: false,
-                imageHtml: undefined,
-                horizonObtained: false
-            };
-        };
         this.shelf = {
-            A: self.getEmptyModel(),
-            B: self.getEmptyModel()
+            ProfileA: getUserModel(),
+            ProfileB: getUserModel()
         };
     }
 

@@ -1,38 +1,43 @@
+require.config({
+    paths: {
+        jquery: '../lib/jquery/dist/jquery.min',
+        userModel: '../js/store/models/user',
+        modelStore: '../js/store/store'
+    }
+});
+
 require(
     [
-        '../lib/jquery/dist/jquery.min'
-    ], function(jquery)
-    {
-        require([
-            '../js/store/store'
-        ], function(ModelStore) {
+        'jquery',
+        'modelStore'
+    ],
+    function($, ModelStore) {
 
-            // Initialize store and bind models to view
-            var modelStore = new ModelStore();
-            bindElementsToModel(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "A");
-            bindElementsToModel(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "B");
-            function bindElementsToModel(elementIds, X){
-                elementIds.forEach(function(e){
-                    rivets.bind($('#' + e)[0], {data: modelStore.shelf[X]});
-                });
-            }
+        // Initialize store and bind models to view
+        var modelStore = new ModelStore();
+        bindElementsToModel(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "ProfileA");
+        bindElementsToModel(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "ProfileB");
+        function bindElementsToModel(elementIds, model){
+            elementIds.forEach(function(e){
+                rivets.bind($('#' + e)[0], {data: modelStore.shelf[model]});
+            });
+        }
 
-            // Get horizon data when finishing input
-            watcher('#handleInputA', "A");
-            watcher('#handleInputB', "B");
-            function watcher(selector, userId){
-                var typingTimer;
-                var doneTypingInterval = 500;
-                $(selector).keyup(function(){
-                    clearTimeout(typingTimer);
-                    if ($(selector).val) {
-                        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-                    }
-                });
-                function doneTyping () {
-                    modelStore.getHandleData(userId);
+        // Get horizon data when finishing input
+        watcher('#handleInputA', "ProfileA");
+        watcher('#handleInputB', "ProfileB");
+        function watcher(selector, userId){
+            var typingTimer;
+            var doneTypingInterval = 500;
+            $(selector).keyup(function(){
+                clearTimeout(typingTimer);
+                if ($(selector).val) {
+                    typingTimer = setTimeout(doneTyping, doneTypingInterval);
                 }
+            });
+            function doneTyping () {
+                modelStore.getHandleData(userId);
             }
-        });
+        }
     }
 );
