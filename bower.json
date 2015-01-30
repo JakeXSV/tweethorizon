@@ -9,6 +9,7 @@
     "jquery": null,
     "skeleton": null,
     "requirejs": null,
-    "rivets": null
+    "rivets": null,
+    "watch": null
   }
 }

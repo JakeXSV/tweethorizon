@@ -1,32 +1,39 @@
 require.config({
     paths: {
         jquery: '../lib/jquery/dist/jquery.min',
+        watch: '../lib/watch/src/watch.min',
         userModel: '../js/store/models/user',
-        modelStore: '../js/store/store'
+        modelStore: '../js/store/store',
+        viewHelper: '../js/viewHelper'
     }
 });
 
 require(
     [
         'jquery',
-        'modelStore'
+        'modelStore',
+        'viewHelper'
     ],
-    function($, ModelStore) {
+    function($, modelStore, viewHelper) {
 
-        // Initialize store and bind models to view
-        var modelStore = new ModelStore();
-        bindElementsToModel(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], "ProfileA");
-        bindElementsToModel(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], "ProfileB");
-        function bindElementsToModel(elementIds, model){
+        // Identifiers for model in modelStore's shelf. Could be made dynamic.
+        var userAId = "UserA";
+        var userBId = "UserB";
+
+        // Initialize data binding
+        viewHelper.getInstance();
+        bindElementsToModel(['inputRowA','followersA','retweetsA', 'favoritesA', 'horizonA'], userAId);
+        bindElementsToModel(['inputRowB','followersB','retweetsB', 'favoritesB', 'horizonB'], userBId);
+        function bindElementsToModel(elementIds, modelId){
             elementIds.forEach(function(e){
-                rivets.bind($('#' + e)[0], {data: modelStore.shelf[model]});
+                rivets.bind($('#' + e)[0], {data: modelStore.getInstance().getModel[modelId]});
             });
         }
 
-        // Get horizon data when finishing input
-        watcher('#handleInputA', "ProfileA");
-        watcher('#handleInputB', "ProfileB");
-        function watcher(selector, userId){
+        // On completion of input, get associated twitter+horizon data
+        watcher('#handleInputA', userAId);
+        watcher('#handleInputB', userBId);
+        function watcher(selector, modelId){
             var typingTimer;
             var doneTypingInterval = 500;
             $(selector).keyup(function(){
@@ -36,7 +43,7 @@ require(
                 }
             });
             function doneTyping () {
-                modelStore.getHandleData(userId);
+                modelStore.getInstance().getHandleData(modelId);
             }
         }
     }

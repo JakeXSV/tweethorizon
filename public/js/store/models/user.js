@@ -1,4 +1,4 @@
-define('userModel', function () {
+define('userModel', function (viewHelper) {
     return function(){
         return {
             handle: undefined,
@@ -9,7 +9,6 @@ define('userModel', function () {
             score: undefined,
             rank: undefined,
             isLoading: false,
-            imageHtml: undefined,
             horizonObtained: false
         }
     };
