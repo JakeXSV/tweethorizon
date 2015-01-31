@@ -1,4 +1,4 @@
-define('modelStore', ['jquery', 'userModel'], function ($, getUserModel) {
+define('modelStore', ['jquery', 'userModel', 'noty'], function ($, getUserModel) {
 
     return (function () {
 
@@ -11,9 +11,8 @@ define('modelStore', ['jquery', 'userModel'], function ($, getUserModel) {
                 UserA: getUserModel(),
                 UserB: getUserModel()
             };
-
             function getModel(modelId){
-                if(shelf[modelId]){
+                if(shelf[modelId] !== undefined){
                     return shelf[modelId];
                 }
             }
@@ -23,9 +22,12 @@ define('modelStore', ['jquery', 'userModel'], function ($, getUserModel) {
             }
 
             function getHandleData(modelId){
-                shelf[modelId].isLoading = true;
-                getProfilePictureUrl(modelId);
-                getHorizonScore(modelId);
+                if(modelId !== undefined && shelf[modelId] !== undefined){
+                    if(shelf[modelId].handle !== undefined && shelf[modelId].handle.length >= 1){
+                        shelf[modelId].isLoading = true;
+                        getProfilePictureUrl(modelId);
+                    }
+                }
             }
 
             function getProfilePictureUrl(modelId){
@@ -36,11 +38,12 @@ define('modelStore', ['jquery', 'userModel'], function ($, getUserModel) {
 
                 request.done(function(e) {
                     shelf[modelId].imagePath = e;
+                    getHorizonScore(modelId);
                 });
 
                 request.fail(function(error, status) {
-                    console.log(error);
-                    console.log(status);
+                    noty({text: 'bad @handle', layout: 'center', type: 'error', theme: 'defaultTheme'});
+                    shelf[modelId].isLoading = false;
                 });
             }
 
