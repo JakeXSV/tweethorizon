@@ -3,6 +3,25 @@ tweethorizon
 
 find out your social reach on twitter, compare your score to your friends
 
+## Build steps
+* Install [nodejs](http://nodejs.org/), and [bower](http://bower.io/)
+* Open terminal and navigate to source code directory
+* Command 'bower install'
+* Command 'npm install'
+* Open the file 'twitter/twitter_store.js'
+* Fill in config object
+```js
+     this.config = {
+         "consumerKey": "abc",
+         "consumerSecret": "abc",
+         "accessToken": "abc",
+         "accessTokenSecret": "abc",
+         "callBackUrl": "http://yourtwitterregisteredappcallbackurl.com"
+     };
+```
+* Command 'node tweethorizon.js'
+
+## Frameworks Used
 **Frontend**  
 [RequireJS](http://requirejs.org/) - AMD loader  
 [Rivets](http://rivetsjs.com/) - Data binding & templating  
