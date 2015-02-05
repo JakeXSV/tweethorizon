@@ -36,7 +36,7 @@ require(
         watcher('#handleInputB', userBId);
         function watcher(selector, modelId){
             var typingTimer;
-            var doneTypingInterval = 500;
+            var doneTypingInterval = 1000;
             $(selector).keyup(function(){
                 clearTimeout(typingTimer);
                 if ($(selector).val) {

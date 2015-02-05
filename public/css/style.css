@@ -364,3 +364,13 @@ body.IE7 .Switch.Round { width: 1px; }
 .invis {
   display: none;
 }
+
+.circleImage {
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
+
+.spacer {
+    margin-top: 15px;
+}

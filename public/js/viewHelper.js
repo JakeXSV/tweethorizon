@@ -8,18 +8,22 @@ define('viewHelper', ['jquery', 'watch', 'modelStore'], function ($, Watch, mode
             var userModelAId = "UserA";
             var userModelBId = "UserB";
 
-            function injectProfilePicture(elementId, imagePath){
+            function injectProfilePicture(modelId, imagePath){
                 var profilePicId = "";
-                var html = "";
-                if(elementId === userModelAId){
+                var pictureId = "#";
+                var html = '<img id="REPLACE_ID" class="centerInParent circleImage spacer" rv-hide="data.isLoading" src="REPLACE_IMG_PATH">';
+                if(modelId === userModelAId){
                     profilePicId = "imgA";
-                    html = '<img id="' + profilePicId + '" class="centerInParent" src="' + imagePath + '">';
-                    $("#pictureA")[0].innerHTML = html;
-                }else if(elementId === userModelBId){
+                    pictureId += "pictureA";
+                }else if(modelId === userModelBId){
                     profilePicId = "imgB";
-                    html = '<img id="' + profilePicId + '" class="centerInParent" src="' + imagePath + '">';
-                    $("#pictureB")[0].innerHTML = html;
+                    pictureId += "pictureB";
                 }
+                html = html.replace("REPLACE_ID", profilePicId);
+                html = html.replace("REPLACE_IMG_PATH", imagePath);
+                var pictureElement = $(pictureId)[0];
+                pictureElement.innerHTML = html;
+                rivets.bind(pictureElement, {data: modelStore.getInstance().getModel(modelId)});
             }
             Watch.watch(modelStore.getInstance().getModel(userModelAId), "imagePath", function(){
                 injectProfilePicture(userModelAId, modelStore.getInstance().getModel(userModelAId).imagePath);
