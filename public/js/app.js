@@ -50,5 +50,10 @@ require(
 
         // Disable second input until first profile horizon is calculated. viewHelper watches for it.
         $("#handleInputB")[0].disabled = true;
+
+        // Show all initially hidden elements. Start hidden due to rivets loading.
+        $(document).ready(function() {
+            $(".hide").show();
+        });
     }
 );

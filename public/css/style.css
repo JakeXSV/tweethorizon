@@ -374,3 +374,7 @@ body.IE7 .Switch.Round { width: 1px; }
 .spacer {
     margin-top: 15px;
 }
+
+.hide {
+    display: none;
+}

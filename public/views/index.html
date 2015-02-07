@@ -29,7 +29,7 @@
 
         <div id="inputRow" class="row">
 
-            <div id="inputRowA" class="one-half column">
+            <div id="inputRowA" class="one-half column hide">
                 <input id="handleInputA" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
                 <div id="loaderA" class="centerInParent" rv-show="data.isLoading">
                     <div class="square"></div>
@@ -45,7 +45,7 @@
                 <div id="pictureA" class="centerInParent"></div>
             </div>
 
-            <div id="inputRowB" class="one-half column">
+            <div id="inputRowB" class="one-half column hide">
                 <input id="handleInputB" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
                 <div id="loaderB" class="centerInParent" rv-show="data.isLoading">
                     <div class="square"></div>
@@ -63,7 +63,7 @@
 
         </div>
 
-        <div id="followersRow" class="row">
+        <div id="followersRow" class="row hide">
             <div id="followersA" class="one-half column" rv-show="data.horizonObtained">
                 <h2 class="value-multiplier centerInParent">{ data.followers }</h2>
                 <h5 class="value-heading centerInParent">Followers</h5>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div id="retweetsRow" class="row">
+        <div id="retweetsRow" class="row hide">
             <div id="retweetsA" class="one-half column" rv-show="data.horizonObtained">
                 <h2 class="value-multiplier centerInParent">{ data.retweets }</h2>
                 <h5 class="value-heading centerInParent">Retweets</h5>
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <div id="favoritesRow" class="row">
+        <div id="favoritesRow" class="row hide">
             <div id="favoritesA" class="one-half column" rv-show="data.horizonObtained">
                 <h2 class="value-multiplier centerInParent">{ data.favorites }</h2>
                 <h5 class="value-heading centerInParent">Favorites</h5>
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div id="horizonRow" class="row">
+        <div id="horizonRow" class="row hide">
             <div id="horizonA" class="one-half column" rv-show="data.horizonObtained">
                 <h5 class="value-heading centerInParent">Horizon Score</h5>
                 <h2 class="value-multiplier centerInParent">{ data.score }</h2>
