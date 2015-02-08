@@ -15,7 +15,8 @@
     "debug": "~2.0.0",
     "ejs": "*",
     "TwitterJSClient": "BoyCook/TwitterJSClient",
-    "bower": "*"
+    "bower": "*",
+    "nedb": "*"
   },
   "engines": {
     "node": "*"
