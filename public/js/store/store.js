@@ -5,12 +5,11 @@ define('modelStore', ['jquery', 'userModel', 'noty'], function ($, getUserModel)
         var instance;
         function init() {
 
-            var getProfilePictureEndpoint = '/horizon/profile/image/';
-            var getHorizonScoreEndpoint = '/horizon/score/';
             var shelf = {
                 UserA: getUserModel(),
                 UserB: getUserModel()
             };
+
             function getModel(modelId){
                 if(shelf[modelId] !== undefined){
                     return shelf[modelId];
@@ -33,7 +32,7 @@ define('modelStore', ['jquery', 'userModel', 'noty'], function ($, getUserModel)
             function getProfilePictureUrl(modelId){
                 var request = $.ajax({
                     type: "GET",
-                    url: getProfilePictureEndpoint + shelf[modelId].handle
+                    url: '/api/' + shelf[modelId].handle + '/image'
                 });
 
                 request.done(function(e) {
@@ -50,7 +49,7 @@ define('modelStore', ['jquery', 'userModel', 'noty'], function ($, getUserModel)
             function getHorizonScore(modelId){
                 var request = $.ajax({
                     type: "GET",
-                    url: getHorizonScoreEndpoint + shelf[modelId].handle
+                    url: '/api/' + shelf[modelId].handle + '/score'
                 });
 
                 request.done(function(e) {

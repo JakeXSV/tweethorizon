@@ -5,6 +5,7 @@ var Leaderboard = (function () {
         var Datastore = require('nedb');
         var db = new Datastore();
         var leaderboardSize = 5;
+        var socketio = undefined;
 
         function sync(handle, score){
 
@@ -14,7 +15,7 @@ var Leaderboard = (function () {
 
             function addedIfOpenHandler(wasAdded){
                 if(wasAdded){
-                    boardChangedHandler(true);
+                    boardChangedHandler();
                 }else{
                     updateIfExistingTopScorer(user, updateHandler);
                 }
@@ -22,7 +23,7 @@ var Leaderboard = (function () {
 
             function updateHandler(wasAlreadyTopScorer){
                 if(wasAlreadyTopScorer){
-                    boardChangedHandler(true);
+                    boardChangedHandler();
                 }else{
                     isTopScore(user, checkTopScoreHandler)
                 }
@@ -31,26 +32,32 @@ var Leaderboard = (function () {
             function checkTopScoreHandler(hadTopScore){
                 if(hadTopScore){
                     dropLowest(dropLowestHandler)
-                }else{
-                    boardChangedHandler(false);
                 }
             }
 
             function dropLowestHandler(droppedLowest){
                 if(droppedLowest){
                     addIfOpenSlot(user, boardChangedHandler);
-                }else{
-                    boardChangedHandler(false);
                 }
             }
 
-            function boardChangedHandler(bool){
-                if(bool){
-                    console.log("updated!");
-                }else{
-                    console.log("not updated");
+            function boardChangedHandler(){
+                if(socketio !== undefined){
+                    db.find({}, function (err, docs) {
+                        socketio.emit('leaderboard', { leaderboard: docs });
+                    });
                 }
             }
+        }
+
+        function getLeaderboard(callback){
+            db.find({}, function (err, docs) {
+                callback(docs);
+            });
+        }
+
+        function setSocketIo(e){
+            socketio = e;
         }
 
         /*
@@ -121,14 +128,16 @@ var Leaderboard = (function () {
         }
 
         return {
-            sync: sync
+            sync: sync,
+            setSocketIo: setSocketIo,
+            getLeaderboard: getLeaderboard
         };
     }
 
     return {
-        getInstance: function (datastore) {
+        getInstance: function () {
             if (!instance) {
-                instance = init(datastore);
+                instance = init();
             }
             return instance;
         }

@@ -5,7 +5,8 @@ require.config({
         userModel: '../js/store/models/user',
         modelStore: '../js/store/store',
         viewHelper: '../js/viewHelper',
-        noty: '../lib/noty/js/noty/packaged/jquery.noty.packaged.min'
+        noty: '../lib/noty/js/noty/packaged/jquery.noty.packaged.min',
+        socketio: '../lib/socket.io-client/socket.io'
     }
 });
 
@@ -13,9 +14,15 @@ require(
     [
         'jquery',
         'modelStore',
-        'viewHelper'
+        'viewHelper',
+        'socketio'
     ],
-    function($, modelStore, viewHelper) {
+    function($, modelStore, viewHelper, socketio) {
+
+        var socket = socketio.connect('http://localhost:3000');
+        socket.on('leaderboard', function (data) {
+            console.log(data);
+        });
 
         // Identifiers for model in modelStore's shelf. Could be made dynamic.
         var userAId = "UserA";

@@ -19,93 +19,129 @@
 
 <a target="_blank" href="https://github.com/Jakehp/tweethorizon"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
 
-    <div id="mainContainer" class="container">
+    <div id="wrapper">
+        <div id="mainContainer" class="container">
 
-        <div class="row">
-            <div class="column">
-                <h4 class="hero-heading centertext">tweet horizon</h4>
-            </div>
-        </div>
-
-        <div id="inputRow" class="row">
-
-            <div id="inputRowA" class="one-half column hide">
-                <input id="handleInputA" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
-                <div id="loaderA" class="centerInParent" rv-show="data.isLoading">
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square last"></div>
-                    <div class="square clear"></div>
-                    <div class="square"></div>
-                    <div class="square last"></div>
-                    <div class="square clear"></div>
-                    <div class="square "></div>
-                    <div class="square last"></div>
+            <div class="row">
+                <div class="column">
+                    <h4 class="hero-heading centertext">tweet horizon</h4>
                 </div>
-                <div id="pictureA" class="centerInParent"></div>
             </div>
 
-            <div id="inputRowB" class="one-half column hide">
-                <input id="handleInputB" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
-                <div id="loaderB" class="centerInParent" rv-show="data.isLoading">
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square last"></div>
-                    <div class="square clear"></div>
-                    <div class="square"></div>
-                    <div class="square last"></div>
-                    <div class="square clear"></div>
-                    <div class="square "></div>
-                    <div class="square last"></div>
+            <div id="inputRow" class="row">
+
+                <div id="inputRowA" class="one-half column hide">
+                    <input id="handleInputA" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
+                    <div id="loaderA" class="centerInParent" rv-show="data.isLoading">
+                        <div class="square"></div>
+                        <div class="square"></div>
+                        <div class="square last"></div>
+                        <div class="square clear"></div>
+                        <div class="square"></div>
+                        <div class="square last"></div>
+                        <div class="square clear"></div>
+                        <div class="square "></div>
+                        <div class="square last"></div>
+                    </div>
+                    <div id="pictureA" class="centerInParent"></div>
                 </div>
-                <div id="pictureB" class="centerInParent"></div>
+
+                <div id="inputRowB" class="one-half column hide">
+                    <input id="handleInputB" class="centerInParent centertext" rv-disabled="data.isLoading" type="text" placeholder="JakeXSV" rv-value="data.handle">
+                    <div id="loaderB" class="centerInParent" rv-show="data.isLoading">
+                        <div class="square"></div>
+                        <div class="square"></div>
+                        <div class="square last"></div>
+                        <div class="square clear"></div>
+                        <div class="square"></div>
+                        <div class="square last"></div>
+                        <div class="square clear"></div>
+                        <div class="square "></div>
+                        <div class="square last"></div>
+                    </div>
+                    <div id="pictureB" class="centerInParent"></div>
+                </div>
+
             </div>
 
-        </div>
+            <div id="followersRow" class="row hide">
+                <div id="followersA" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.followers }</h2>
+                    <h5 class="value-heading centerInParent">Followers</h5>
+                </div>
+                <div id="followersB" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.followers }</h2>
+                    <h5 class="value-heading centerInParent">Followers</h5>
+                </div>
+            </div>
 
-        <div id="followersRow" class="row hide">
-            <div id="followersA" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.followers }</h2>
-                <h5 class="value-heading centerInParent">Followers</h5>
+            <div id="retweetsRow" class="row hide">
+                <div id="retweetsA" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.retweets }</h2>
+                    <h5 class="value-heading centerInParent">Retweets</h5>
+                </div>
+                <div id="retweetsB" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.retweets }</h2>
+                    <h5 class="value-heading centerInParent">Retweets</h5>
+                </div>
             </div>
-            <div id="followersB" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.followers }</h2>
-                <h5 class="value-heading centerInParent">Followers</h5>
-            </div>
-        </div>
 
-        <div id="retweetsRow" class="row hide">
-            <div id="retweetsA" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.retweets }</h2>
-                <h5 class="value-heading centerInParent">Retweets</h5>
+            <div id="favoritesRow" class="row hide">
+                <div id="favoritesA" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.favorites }</h2>
+                    <h5 class="value-heading centerInParent">Favorites</h5>
+                </div>
+                <div id="favoritesB" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.favorites }</h2>
+                    <h5 class="value-heading centerInParent">Favorites</h5>
+                </div>
             </div>
-            <div id="retweetsB" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.retweets }</h2>
-                <h5 class="value-heading centerInParent">Retweets</h5>
-            </div>
-        </div>
 
-        <div id="favoritesRow" class="row hide">
-            <div id="favoritesA" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.favorites }</h2>
-                <h5 class="value-heading centerInParent">Favorites</h5>
-            </div>
-            <div id="favoritesB" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.favorites }</h2>
-                <h5 class="value-heading centerInParent">Favorites</h5>
-            </div>
-        </div>
-
-        <div id="horizonRow" class="row hide">
-            <div id="horizonA" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.score }</h2>
-                <p class="value-description centerInParent">Rank #0 within tweet horizon.</p>
-            </div>
-            <div id="horizonB" class="one-half column" rv-show="data.horizonObtained">
-                <h2 class="value-multiplier centerInParent">{ data.score }</h2>
-                <p class="value-description centerInParent">Rank #{ data.rank } within tweet horizon.</p>
+            <div id="horizonRow" class="row hide">
+                <div id="horizonA" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.score }</h2>
+                    <p class="value-description centerInParent">Rank #0 within tweet horizon.</p>
+                </div>
+                <div id="horizonB" class="one-half column" rv-show="data.horizonObtained">
+                    <h2 class="value-multiplier centerInParent">{ data.score }</h2>
+                    <p class="value-description centerInParent">Rank #{ data.rank } within tweet horizon.</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <div id="footer" class="centerInParent">
+        <table>
+            <thead>
+            <tr>
+                <th>handle</th>
+                <th>score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Derp Derpson</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>Derp Derpson</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Derp Derpson</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Derp Derpson</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Derp Derpson</td>
+                <td>42</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>

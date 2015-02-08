@@ -4,11 +4,10 @@ var HorizonCalc = require('../util/horizon_calc');
 var express = require('express');
 var router = express.Router();
 
-router.get('/score/:handle', function(req, res) {
+router.get('/:handle/score', function(req, res) {
     var handle = req.params.handle;
 
     twitterApi.getTimeline(handle, timelineResponseHandler);
-
     function timelineResponseHandler(timeline) {
         if (timeline) {
             getStats(timeline);
@@ -22,10 +21,9 @@ router.get('/score/:handle', function(req, res) {
         Leaderboard.getInstance().sync(handle, stats.horizon.score);
         res.json(stats);
     }
-
 });
 
-router.get('/profile/image/:handle', function(req, res) {
+router.get('/:handle/image', function(req, res) {
     twitterApi.getProfilePictureUrl(req.params.handle, twitterApiResponseHandler);
     function twitterApiResponseHandler(imageUrl) {
         if (imageUrl) {
