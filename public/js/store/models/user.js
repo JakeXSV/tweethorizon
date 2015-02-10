@@ -1,4 +1,4 @@
-define('userModel', function (viewHelper) {
+define('userModel', function () {
     return function(){
         return {
             handle: undefined,

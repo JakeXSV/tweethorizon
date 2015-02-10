@@ -1,67 +1,63 @@
-define('modelStore', ['jquery', 'userModel', 'noty'], function ($, getUserModel) {
+define('modelStore', ['jquery', 'userModel', 'leaderBoard'], function ($, getUserModel, getLeaderBoard) {
 
     return (function () {
 
         var instance;
         function init() {
 
+            /*
+             var socket = socketio.connect(document.URL);
+             socket.on('leaderboard', function (data) {
+             console.log(data);
+             });
+             */
             var shelf = {
-                UserA: getUserModel(),
-                UserB: getUserModel()
+                User: getUserModel(),
+                leaderBoard: getLeaderBoard()
             };
-
-            function getModel(modelId){
-                if(shelf[modelId] !== undefined){
-                    return shelf[modelId];
-                }
-            }
-
             function getShelf(){
                 return shelf;
             }
-
-            function getHandleData(modelId){
-                if(modelId !== undefined && shelf[modelId] !== undefined){
-                    if(shelf[modelId].handle !== undefined && shelf[modelId].handle.length >= 1){
-                        shelf[modelId].isLoading = true;
-                        getProfilePictureUrl(modelId);
-                    }
+            function getModel(){
+                if(shelf.User !== undefined){
+                    return shelf.User;
+                }
+            }
+            function getHandleData(){
+                if(shelf.User.handle !== undefined && shelf.User.handle.length >= 1){
+                    shelf.User.isLoading = true;
+                    getProfilePictureUrl();
                 }
             }
 
-            function getProfilePictureUrl(modelId){
+            function getProfilePictureUrl(){
                 var request = $.ajax({
                     type: "GET",
-                    url: '/api/' + shelf[modelId].handle + '/image'
+                    url: '/api/' + shelf.User.handle + '/image'
                 });
-
                 request.done(function(e) {
-                    shelf[modelId].imagePath = e;
-                    getHorizonScore(modelId);
+                    shelf.User.imagePath = e;
+                    getHorizonScore();
                 });
-
                 request.fail(function(error, status) {
                     noty({text: 'bad @handle', layout: 'center', type: 'error', theme: 'defaultTheme'});
-                    shelf[modelId].isLoading = false;
+                    shelf.User.isLoading = false;
                 });
             }
-
-            function getHorizonScore(modelId){
+            function getHorizonScore(){
                 var request = $.ajax({
                     type: "GET",
-                    url: '/api/' + shelf[modelId].handle + '/score'
+                    url: '/api/' + shelf.User.handle + '/score'
                 });
-
                 request.done(function(e) {
-                    shelf[modelId].followers = e.horizon.followers;
-                    shelf[modelId].retweets = e.horizon.retweets;
-                    shelf[modelId].favorites = e.horizon.favorites;
-                    shelf[modelId].score = e.horizon.score;
-                    shelf[modelId].rank = e.horizon.rank;
-                    shelf[modelId].horizonObtained = true;
-                    shelf[modelId].isLoading = false;
+                    shelf.User.followers = e.horizon.followers;
+                    shelf.User.retweets = e.horizon.retweets;
+                    shelf.User.favorites = e.horizon.favorites;
+                    shelf.User.score = e.horizon.score;
+                    shelf.User.rank = e.horizon.rank;
+                    shelf.User.horizonObtained = true;
+                    shelf.User.isLoading = false;
                 });
-
                 request.fail(function(error, status) {
                     console.log(error);
                     console.log(status);
