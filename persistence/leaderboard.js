@@ -1,9 +1,9 @@
-var Leaderboard = (function () {
+var leaderBoard = (function () {
     var instance;
     function init() {
 
-        var Datastore = require('nedb');
-        var db = new Datastore();
+        var dataStore = require('nedb');
+        var db = new dataStore();
         var leaderboardSize = 5;
         var socketio = undefined;
 
@@ -44,13 +44,13 @@ var Leaderboard = (function () {
             function boardChangedHandler(){
                 if(socketio !== undefined){
                     db.find({}, function (err, docs) {
-                        socketio.emit('leaderboard', { leaderboard: docs });
+                        socketio.emit('leaderBoard', { leaderBoard: docs });
                     });
                 }
             }
         }
 
-        function getLeaderboard(callback){
+        function getLeaderBoard(callback){
             db.find({}, function (err, docs) {
                 callback(docs);
             });
@@ -130,7 +130,7 @@ var Leaderboard = (function () {
         return {
             sync: sync,
             setSocketIo: setSocketIo,
-            getLeaderboard: getLeaderboard
+            getLeaderBoard: getLeaderBoard
         };
     }
 
@@ -144,4 +144,4 @@ var Leaderboard = (function () {
     };
 })();
 
-module.exports = Leaderboard;
+module.exports = leaderBoard;

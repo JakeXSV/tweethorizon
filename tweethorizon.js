@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var api = require('./routes/api');
-var Leaderboard = require('./persistence/leaderboard');
+var leaderBoard = require('./persistence/leaderBoard');
 
 var app = express();
 
@@ -36,12 +36,15 @@ var server = app.listen(app.get('port'), function() {
 
 // Send leaderboards on connection.
 var io = require('socket.io')(server);
-Leaderboard.getInstance().setSocketIo(io);
+console.log(leaderBoard.getInstance());
+leaderBoard.getInstance().setSocketIo(io);
 io.on('connection', function (socket) {
-    function sendLeaderboard(board){
-        socket.emit('leaderboard', { leaderboard: board });
+    function sendLeaderBoard(board){
+        console.log("HIT!");
+        console.log(board);
+        socket.emit('leaderBoard', { leaderBoard: board });
     }
-    Leaderboard.getInstance().getLeaderboard(sendLeaderboard);
+    leaderBoard.getInstance().getLeaderBoard(sendLeaderBoard);
 });
 
 module.exports = app;

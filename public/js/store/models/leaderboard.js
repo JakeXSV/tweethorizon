@@ -7,6 +7,7 @@ define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
          */
         function setBoard(data){
             if(data !== undefined){
+                leaderBoard = [];
                 data.forEach(function(e){
                     try{
                         var leader = getLeaderModel();
@@ -22,7 +23,6 @@ define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
             return leaderBoard;
         }
         return {
-            leaderBoard: leaderBoard,
             getBoard: getBoard,
             setBoard: setBoard
         }

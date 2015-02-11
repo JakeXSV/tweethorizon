@@ -16,15 +16,24 @@ require(
     [
         'jquery',
         'modelStore',
-        'picLoader'
+        'picLoader',
+        'socketio'
     ],
-    function($, modelStore, picLoader) {
+    function($, modelStore, picLoader, socketio) {
+
+        // Listen
+        var socket = socketio.connect(document.URL);
+        socket.on('leaderBoard', function (data) {
+            console.log(modelStore.getInstance().getLeaderBoard());
+            modelStore.getInstance().setLeaderBoard(data.leaderBoard);
+            console.log(modelStore.getInstance().getLeaderBoard());
+        });
 
         // Initialize data binding
         bindElementsToUserModel(['inputRow','followers','retweets', 'favorites', 'horizon']);
         function bindElementsToUserModel(elementIds){
             elementIds.forEach(function(e){
-                rivets.bind($('#' + e)[0], {data: modelStore.getInstance().getModel()});
+                rivets.bind($('#' + e)[0], {data: modelStore.getInstance().getUser()});
             });
         }
         picLoader.getInstance(); //watches user model and renders profile pic in dom

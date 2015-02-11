@@ -1,5 +1,5 @@
 var twitterApi = new(require('../twitter/twitter_store.js'))();
-var Leaderboard = require('../persistence/leaderboard');
+var Leaderboard = require('../persistence/leaderBoard');
 var HorizonCalc = require('../util/horizon_calc');
 var express = require('express');
 var router = express.Router();

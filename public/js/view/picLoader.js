@@ -8,10 +8,10 @@ define('picLoader', ['jquery', 'watch', 'modelStore'], function ($, Watch, model
                 var pictureHtml = '<img id="img" class="centerInParent circleImage spacer" rv-hide="data.isLoading" src="'+imagePath+'">';
                 var pictureElement = $(pictureId)[0];
                 pictureElement.innerHTML = pictureHtml;
-                rivets.bind(pictureElement, {data: modelStore.getInstance().getModel()});
+                rivets.bind(pictureElement, {data: modelStore.getInstance().getUser()});
             }
-            Watch.watch(modelStore.getInstance().getModel(), "imagePath", function(){
-                injectProfilePicture(modelStore.getInstance().getModel().imagePath);
+            Watch.watch(modelStore.getInstance().getUser(), "imagePath", function(){
+                injectProfilePicture(modelStore.getInstance().getUser().imagePath);
             });
         }
 
