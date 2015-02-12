@@ -1,23 +1,43 @@
 define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
     return function(){
+        var leaderBoardSize = 5;
         var leaderBoard = [];
-        /*
-        Instead of just adding whatever is passed from socket, let's enforce the model
-        defined in the client.
-         */
-        function setBoard(data){
-            if(data !== undefined){
-                leaderBoard = [];
-                data.forEach(function(e){
-                    try{
-                        var leader = getLeaderModel();
-                        leader.set(e);
-                        leaderBoard.push(leader);
-                    }catch(exception){
-                        console.log("Invalid model - not adding to leader board.");
-                    }
-                })
+        for(var i=0; i<leaderBoardSize; i++){
+            leaderBoard.push(getLeaderModel());
+        }
+
+        function setBoard(setOfLeaders){
+            setOfLeaders = sort(setOfLeaders);
+            if(setOfLeaders !== undefined && setOfLeaders.length > 0){
+                for(var i=0; i<setOfLeaders.length; i++){
+                    leaderBoard[i]._id = setOfLeaders[i]._id;
+                    leaderBoard[i].handle = setOfLeaders[i].handle;
+                    leaderBoard[i].score = setOfLeaders[i].score;
+                    leaderBoard[i].show = true;
+                }
             }
+        }
+        //Sort an array of leader objects by score from largest, to smallest.
+        function sort(unsortedData){
+            var sortedData = [];
+            unsortedData.forEach(function(unsortedElement){
+                if(sortedData.length > 0){
+                    var added = false;
+                    for(var i=0; i<sortedData.length; i++){
+                        if(unsortedElement.score < sortedData[i]['score']){
+                            sortedData.splice(i, 0, unsortedElement);
+                            i++;
+                            added = true;
+                        }
+                    }
+                    if(!added){
+                        sortedData.push(unsortedElement);
+                    }
+                }else{
+                    sortedData.push(unsortedElement);
+                }
+            });
+            return sortedData.reverse();
         }
         function getBoard(){
             return leaderBoard;

@@ -21,22 +21,29 @@ require(
     ],
     function($, modelStore, picLoader, socketio) {
 
-        // Listen
+        // Listen for leaderboard updates from server
         var socket = socketio.connect(document.URL);
         socket.on('leaderBoard', function (data) {
-            console.log(modelStore.getInstance().getLeaderBoard());
             modelStore.getInstance().setLeaderBoard(data.leaderBoard);
-            console.log(modelStore.getInstance().getLeaderBoard());
         });
 
-        // Initialize data binding
+        // Bind view components to models in store
         bindElementsToUserModel(['inputRow','followers','retweets', 'favorites', 'horizon']);
         function bindElementsToUserModel(elementIds){
             elementIds.forEach(function(e){
                 rivets.bind($('#' + e)[0], {data: modelStore.getInstance().getUser()});
             });
         }
-        picLoader.getInstance(); //watches user model and renders profile pic in dom
+        bindElementsToLeaderBoard(["first", "second", "third", "fourth", "fifth"]);
+        function bindElementsToLeaderBoard(elementIds){
+            var i=0;
+            elementIds.forEach(function(e){
+                rivets.bind($('#' + e)[0], modelStore.getInstance().getLeaderBoard()[i++]);
+            });
+        }
+
+        //watches user model and renders profile pic in dom
+        picLoader.getInstance();
 
         // On completion of input, get associated twitter+horizon data
         watcher('#handleInput');

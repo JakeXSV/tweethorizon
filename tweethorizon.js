@@ -40,8 +40,6 @@ console.log(leaderBoard.getInstance());
 leaderBoard.getInstance().setSocketIo(io);
 io.on('connection', function (socket) {
     function sendLeaderBoard(board){
-        console.log("HIT!");
-        console.log(board);
         socket.emit('leaderBoard', { leaderBoard: board });
     }
     leaderBoard.getInstance().getLeaderBoard(sendLeaderBoard);

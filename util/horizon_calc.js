@@ -1,4 +1,4 @@
-var TweetValidator = (function () {
+var HorizonCalc = (function () {
     var instance;
 
     function init() {
@@ -54,4 +54,4 @@ var TweetValidator = (function () {
     };
 })();
 
-module.exports = TweetValidator;
+module.exports = HorizonCalc;
