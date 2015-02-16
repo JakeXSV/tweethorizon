@@ -1,3 +1,4 @@
+"use strict";
 define('leaderModel', function () {
     return function(){
         return {

@@ -1,3 +1,4 @@
+"use strict";
 define('userModel', function () {
     return function(){
         return {

@@ -1,3 +1,4 @@
+"use strict";
 var twitterApi = new(require('../twitter/twitter_store.js'))();
 var Leaderboard = require('../persistence/leaderBoard');
 var HorizonCalc = require('../util/horizon_calc');

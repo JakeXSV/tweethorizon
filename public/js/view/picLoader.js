@@ -1,5 +1,5 @@
+"use strict";
 define('picLoader', ['jquery', 'watch', 'modelStore'], function ($, Watch, modelStore) {
-
     return (function () {
         var instance;
         function init() {

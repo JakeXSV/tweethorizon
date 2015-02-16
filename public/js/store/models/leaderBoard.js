@@ -1,3 +1,4 @@
+"use strict";
 define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
     return function(){
         var leaderBoardSize = 5;

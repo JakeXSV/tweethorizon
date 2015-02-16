@@ -1,3 +1,4 @@
+"use strict";
 define('modelStore', ['jquery', 'userModel', 'leaderBoard'], function ($, getUserModel, getLeaderBoardModel) {
 
     return (function () {
