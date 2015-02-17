@@ -4,51 +4,46 @@ var leaderBoard = (function () {
     function init() {
 
         var dataStore = require('nedb');
+        var Promise = require('promise');
         var db = new dataStore();
-        var leaderboardSize = 5;
+        var leaderBoardSize = 5;
         var socketio = undefined;
+
+        function boardChangedHandler(){
+            if(socketio !== undefined){
+                db.find({}, function (err, docs) {
+                    socketio.emit('leaderBoard', { leaderBoard: docs });
+                });
+            }
+        }
 
         function sync(handle, score){
 
             var user = { handle: handle, score: score};
 
-            addIfOpenSlot(user, addedIfOpenHandler);
-
-            function addedIfOpenHandler(wasAdded){
-                if(wasAdded){
-                    boardChangedHandler();
-                }else{
-                    updateIfExistingTopScorer(user, updateHandler);
-                }
-            }
-
-            function updateHandler(wasAlreadyTopScorer){
-                if(wasAlreadyTopScorer){
-                    boardChangedHandler();
-                }else{
-                    isTopScore(user, checkTopScoreHandler)
-                }
-            }
-
-            function checkTopScoreHandler(hadTopScore){
-                if(hadTopScore){
-                    dropLowest(dropLowestHandler)
-                }
-            }
-
-            function dropLowestHandler(droppedLowest){
-                if(droppedLowest){
-                    addIfOpenSlot(user, boardChangedHandler);
-                }
-            }
-
-            function boardChangedHandler(){
-                if(socketio !== undefined){
-                    db.find({}, function (err, docs) {
-                        socketio.emit('leaderBoard', { leaderBoard: docs });
+            Promise.all([isExistingLeader(user), isOpenSlot(), isTopScore(user.score)]).then(function(results){
+                var isAlreadyLeader = results[0];
+                var openSlot = results[1];
+                var isTopScore = results[2];
+                if(isAlreadyLeader){
+                    updateExistingLeader(user).then(function(){
+                        boardChangedHandler();
+                    });
+                }else if(openSlot){
+                    insertLeader(user).then(function(){
+                       boardChangedHandler();
+                    });
+                }else if(isTopScore){
+                    dropLowest().then(function(dropped){
+                        if(dropped){
+                            insertLeader(user).then(function(){
+                                boardChangedHandler();
+                            })
+                        }
                     });
                 }
-            }
+            });
+
         }
 
         function getLeaderBoard(callback){
@@ -61,9 +56,83 @@ var leaderBoard = (function () {
             socketio = e;
         }
 
-        /*
-        Functions utilized by sync
-         */
+        // Database Mutators
+        function updateExistingLeader(user){
+            return new Promise(function (fulfill, reject) {
+                db.update({handle: user.handle}, {$set: {score: user.score}}, {multi: false}, function (err, numUpdated) {
+                    if (err !== undefined && err !== null && numUpdated !== undefined && numUpdated !== null) {
+                        console.log("ERROR - updateExistingLeader - " + user);
+                        reject();
+                    } else {
+                        fulfill(numUpdated === 1);
+                    }
+                });
+            });
+        }
+        function insertLeader(user){
+            return new Promise(function (fulfill, reject) {
+                db.insert(user, function (err, result) {
+                    if (err !== undefined && err !== null && result !== undefined && result !== null) {
+                        console.log("ERROR - insertLeader - " + user);
+                        reject();
+                    } else {
+                        fulfill(result);
+                    }
+                })
+            });
+        }
+        function dropLowest(){
+            return new Promise(function (fulfill, reject) {
+                db.find({}, function (err, docs) {
+                    var lowest = getLowestFromDocs(docs);
+                    db.remove(lowest, {}, function (err, numRemoved) {
+                        if (err !== undefined && err !== null && numRemoved !== undefined && numRemoved !== null) {
+                            console.log("ERROR - dropLowest");
+                            reject();
+                        } else {
+                            fulfill(numRemoved === 1);
+                        }
+                    });
+                });
+            });
+        }
+
+        // Database Accessors
+        function isTopScore(score){
+            return new Promise(function (fulfill, reject) {
+                db.find({"score": {$lt: score}}, function (err, results) {
+                    if(err !== undefined && err !== null && results !== null && results !== undefined){
+                        reject();
+                    }else{
+                        fulfill(results.length > 0);
+                    }
+                });
+            });
+        }
+        function isExistingLeader(user){
+            return new Promise(function (fulfill, reject) {
+                db.find({ handle: user.handle }, function (err, results) {
+                    if (err !== undefined && err !== null && results !== undefined && results !== null) {
+                        reject();
+                    } else {
+                        fulfill(results.length !== 0);
+                    }
+                });
+            });
+        }
+        function isOpenSlot(){
+            return new Promise(function (fulfill, reject) {
+                db.count({}, function (err, count) {
+                    if(err !== undefined && err !== null){
+                        reject();
+                    }else{
+                        fulfill (count < leaderBoardSize);
+                    }
+                });
+            });
+        }
+
+        // Util Funcs
         function getLowestFromDocs(docs){
             if(docs !== undefined && docs !== null){
                 var lowestHandle = '';
@@ -80,52 +149,6 @@ var leaderBoard = (function () {
                 });
                 return { handle: lowestHandle, score: lowestScore};
             }
-        }
-
-        function isTopScore(user, next){
-            db.find({ "score": { $lt: user.score } }, function (err, docs) {
-                console.log(docs);
-                if(docs !== null && docs !== undefined && docs.length > 0){
-                    next(true);
-                }else{
-                    next(false);
-                }
-            });
-        }
-
-        function dropLowest(next){
-            db.find({}, function (err, docs) {
-                var lowest = getLowestFromDocs(docs);
-                db.remove(lowest, {}, function(err, numRemoved){
-                    if(numRemoved === 1){
-                        next(true);
-                    }else{
-                        next(false);
-                    }
-                });
-            });
-        }
-
-        function updateIfExistingTopScorer(user, next){
-            db.update({ handle: user.handle }, { $set: { score: user.score } }, function (err, docs) {
-                if(docs !== null && docs !== undefined && docs !== 0){
-                    next(true);
-                }else{
-                    next(false);
-                }
-            });
-        }
-
-        function addIfOpenSlot(user, next){
-            db.count({}, function (err, count) {
-                if(count < leaderboardSize){
-                    db.insert(user, function(){
-                        next(true);
-                    });
-                }else{
-                    next(false);
-                }
-            });
         }
 
         return {

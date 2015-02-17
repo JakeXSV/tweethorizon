@@ -17,7 +17,8 @@
     "TwitterJSClient": "BoyCook/TwitterJSClient",
     "bower": "*",
     "nedb": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "promise": "*"
   },
   "engines": {
     "node": "*"

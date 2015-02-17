@@ -26,9 +26,11 @@ define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
                     var added = false;
                     for(var i=0; i<sortedData.length; i++){
                         if(unsortedElement.score < sortedData[i]['score']){
-                            sortedData.splice(i, 0, unsortedElement);
-                            i++;
-                            added = true;
+                            if(!added){
+                                sortedData.splice(i, 0, unsortedElement);
+                                i++;
+                                added = true;
+                            }
                         }
                     }
                     if(!added){
