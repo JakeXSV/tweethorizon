@@ -394,19 +394,3 @@ body:before { /* thanks to Maleika (Kohoutec)*/
     width: 0;
     margin-top: -32767px; /* thank you Erik J */
 }
-
-html, body, #wrapper {
-    height: 100%;
-    overflow-y: hidden;
-}
-
-body > #wrapper {
-    height: auto;
-    min-height: 100%;
-}
-
-/* must be same height as the footer */
-#content {
-    overflow-y: hidden;
-    padding-bottom: 400px;
-}
