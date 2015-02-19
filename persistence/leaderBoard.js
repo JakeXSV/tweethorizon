@@ -3,9 +3,9 @@ var leaderBoard = (function () {
     var instance;
     function init() {
 
-        var dataStore = require('nedb');
+        var DataStore = require('nedb');
         var Promise = require('promise');
-        var db = new dataStore();
+        var db = new DataStore();
         var leaderBoardSize = 5;
         var socketio = undefined;
 
@@ -18,9 +18,7 @@ var leaderBoard = (function () {
         }
 
         function sync(handle, score){
-
             var user = { handle: handle, score: score};
-
             Promise.all([isExistingLeader(user), isOpenSlot(), isTopScore(user.score)]).then(function(results){
                 var isAlreadyLeader = results[0];
                 var openSlot = results[1];
@@ -43,12 +41,18 @@ var leaderBoard = (function () {
                     });
                 }
             });
-
         }
 
-        function getLeaderBoard(callback){
-            db.find({}, function (err, docs) {
-                callback(docs);
+        function getLeaderBoard(){
+            return new Promise(function (fulfill, reject) {
+                db.find({}, function (err, docs) {
+                    if (err !== undefined && err !== null) {
+                        console.log("ERROR - getLeaderBoard");
+                        reject();
+                    } else {
+                        fulfill(docs);
+                    }
+                });
             });
         }
 

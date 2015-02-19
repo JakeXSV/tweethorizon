@@ -21,6 +21,11 @@ find out your social reach on twitter, compare your score to your friends
 ```
 * Command 'node tweethorizon.js'
 
+## Run tests
+* Open terminal and navigate to source code directory
+* Command 'npm install -g mocha'
+* Command 'mocha tests/path/to/test/file'
+
 ## Frameworks Used
 **Frontend**  
 [RequireJS](http://requirejs.org/) - AMD loader  

@@ -5,9 +5,9 @@ require.config({
         watch: '../lib/watch/src/watch.min',
         userModel: '../js/store/models/user',
         leaderModel: '../js/store/models/leader',
+        leaderBoardModel: '../js/store/models/leaderBoard',
         modelStore: '../js/store/store',
         picLoader: '../js/view/picLoader',
-        leaderBoard: '../js/store/models/leaderBoard',
         noty: '../lib/noty/js/noty/packaged/jquery.noty.packaged.min',
         socketio: '../lib/socket.io-client/socket.io'
     }

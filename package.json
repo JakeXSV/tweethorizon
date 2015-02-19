@@ -18,7 +18,11 @@
     "bower": "*",
     "nedb": "*",
     "socket.io": "*",
-    "promise": "*"
+    "promise": "*",
+    "amdefine": "*",
+    "assert": "*",
+    "should": "*",
+    "it": "*"
   },
   "engines": {
     "node": "*"

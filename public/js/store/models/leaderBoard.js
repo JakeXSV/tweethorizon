@@ -1,12 +1,20 @@
 "use strict";
-define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
-    return function(){
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
+define(function (require) {
+    return function(testing){
+
+        var getLeaderModel = require('leaderModel');
         var leaderBoardSize = 5;
         var leaderBoard = [];
         for(var i=0; i<leaderBoardSize; i++){
             leaderBoard.push(getLeaderModel());
         }
 
+        function getBoard(){
+            return leaderBoard;
+        }
         function setBoard(setOfLeaders){
             setOfLeaders = sort(setOfLeaders);
             if(setOfLeaders !== undefined && setOfLeaders.length > 0){
@@ -42,12 +50,15 @@ define('leaderBoard', ['leaderModel'], function (getLeaderModel) {
             });
             return sortedData.reverse();
         }
-        function getBoard(){
-            return leaderBoard;
-        }
-        return {
+
+        var that = {
             getBoard: getBoard,
             setBoard: setBoard
+        };
+        if(testing !== undefined && testing){
+            that.sort = sort;
         }
+        return that;
+
     };
 });
