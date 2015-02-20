@@ -1,5 +1,5 @@
 "use strict";
-define('modelStore', ['jquery', 'userModel', 'leaderBoard'], function ($, getUserModel, getLeaderBoardModel) {
+define('modelStore', ['jquery', 'userModel', 'leaderBoardModel'], function ($, getUserModel, getLeaderBoardModel) {
 
     return (function () {
 
