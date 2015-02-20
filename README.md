@@ -23,7 +23,8 @@ find out your social reach on twitter, compare your score to your friends
 
 ## Run tests
 * Open terminal and navigate to source code directory
-* Command 'node tests/test.js'
+* Command 'node tests/clientTests.js'
+* Command 'node tests/serverTests.js'
 
 ## Frameworks Used
 **Frontend**  
