@@ -1,5 +1,5 @@
 "use strict";
-define('modelStore', ['jquery', 'userModel', 'leaderBoardModel'], function ($, getUserModel, getLeaderBoardModel) {
+define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'prettifier'], function ($, getUserModel, getLeaderBoardModel, prettifier) {
 
     return (function () {
 
@@ -52,11 +52,10 @@ define('modelStore', ['jquery', 'userModel', 'leaderBoardModel'], function ($, g
                     url: '/api/' + shelf.user.handle + '/score'
                 });
                 request.done(function(e) {
-                    shelf.user.followers = e.horizon.followers;
-                    shelf.user.retweets = e.horizon.retweets;
-                    shelf.user.favorites = e.horizon.favorites;
-                    shelf.user.score = e.horizon.score;
-                    shelf.user.rank = e.horizon.rank;
+                    shelf.user.followers = prettifier.getInstance().numberWithCommas(e.horizon.followers);
+                    shelf.user.retweets = prettifier.getInstance().numberWithCommas(e.horizon.retweets);
+                    shelf.user.favorites = prettifier.getInstance().numberWithCommas(e.horizon.favorites);
+                    shelf.user.score = prettifier.getInstance().numberWithCommas(e.horizon.score);
                     shelf.user.horizonObtained = true;
                     shelf.user.isLoading = false;
                 });

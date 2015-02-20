@@ -5,6 +5,7 @@ if (typeof define !== 'function') {
 define(function (require) {
     return function(testing){
 
+        var prettifier = require('prettifier');
         var getLeaderModel = require('leaderModel');
         var leaderBoardSize = 5;
         var leaderBoard = [];
@@ -21,11 +22,12 @@ define(function (require) {
                 for(var i=0; i<setOfLeaders.length; i++){
                     leaderBoard[i]._id = setOfLeaders[i]._id;
                     leaderBoard[i].handle = setOfLeaders[i].handle;
-                    leaderBoard[i].score = setOfLeaders[i].score;
+                    leaderBoard[i].score = prettifier.getInstance().numberWithCommas(setOfLeaders[i].score);
                     leaderBoard[i].show = true;
                 }
             }
         }
+
         //Sort an array of leader objects by score from largest, to smallest.
         function sort(unsortedData){
             var sortedData = [];

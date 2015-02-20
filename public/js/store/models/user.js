@@ -8,7 +8,6 @@ define('userModel', function () {
             retweets: undefined,
             favorites: undefined,
             score: undefined,
-            rank: undefined,
             isLoading: false,
             horizonObtained: false
         }

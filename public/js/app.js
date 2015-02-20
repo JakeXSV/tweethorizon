@@ -9,7 +9,8 @@ require.config({
         modelStore: '../js/store/store',
         picLoader: '../js/view/picLoader',
         noty: '../lib/noty/js/noty/packaged/jquery.noty.packaged.min',
-        socketio: '../lib/socket.io-client/socket.io'
+        socketio: '../lib/socket.io-client/socket.io',
+        prettifier: '../js/util/prettifier'
     }
 });
 
