@@ -25,7 +25,7 @@ find out your social reach on twitter, compare your score to your friends
 * Open terminal and navigate to source code directory
 * Command 'node tests/clientTests.js'
 * Command 'node tests/serverTests.js'
-* 
+
 ## Frameworks Used
 **Frontend**  
 [RequireJS](http://requirejs.org/) - AMD loader  
