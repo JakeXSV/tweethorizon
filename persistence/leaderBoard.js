@@ -18,28 +18,35 @@ var leaderBoard = (function () {
         }
 
         function sync(handle, score){
-            var user = { handle: handle, score: score};
-            Promise.all([isExistingLeader(user), isOpenSlot(), isTopScore(user.score)]).then(function(results){
-                var isAlreadyLeader = results[0];
-                var openSlot = results[1];
-                var isTopScore = results[2];
-                if(isAlreadyLeader){
-                    updateExistingLeader(user).then(function(){
-                        boardChangedHandler();
-                    });
-                }else if(openSlot){
-                    insertLeader(user).then(function(){
-                       boardChangedHandler();
-                    });
-                }else if(isTopScore){
-                    dropLowest().then(function(dropped){
-                        if(dropped){
-                            insertLeader(user).then(function(){
-                                boardChangedHandler();
-                            })
-                        }
-                    });
-                }
+            return new Promise(function (fulfill) {
+                var user = {handle: handle, score: score};
+                Promise.all([isExistingLeader(user), isOpenSlot(), isTopScore(user.score)]).then(function (results) {
+                    var isAlreadyLeader = results[0];
+                    var openSlot = results[1];
+                    var isTopScore = results[2];
+                    if (isAlreadyLeader) {
+                        updateExistingLeader(user).then(function () {
+                            boardChangedHandler();
+                            fulfill(true);
+                        });
+                    } else if (openSlot) {
+                        insertLeader(user).then(function () {
+                            boardChangedHandler();
+                            fulfill(true);
+                        });
+                    } else if (isTopScore) {
+                        dropLowest().then(function (dropped) {
+                            if (dropped) {
+                                insertLeader(user).then(function () {
+                                    boardChangedHandler();
+                                    fulfill(true);
+                                })
+                            }
+                        });
+                    } else{
+                        fulfill(false);
+                    }
+                });
             });
         }
 
@@ -82,7 +89,7 @@ var leaderBoard = (function () {
                     } else {
                         fulfill(result);
                     }
-                })
+                });
             });
         }
         function dropLowest(){
