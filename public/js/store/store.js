@@ -1,5 +1,5 @@
 "use strict";
-define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'prettifier'], function ($, getUserModel, getLeaderBoardModel, prettifier) {
+define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'toastr', 'prettifier'], function ($, getUserModel, getLeaderBoardModel, toastr, prettifier) {
 
     return (function () {
 
@@ -37,12 +37,13 @@ define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'prettifier'], 
                     type: "GET",
                     url: '/api/' + shelf.user.handle + '/image'
                 });
-                request.done(function(e) {
+                request.done(function (e) {
                     shelf.user.imagePath = e;
                     getHorizonScore();
                 });
-                request.fail(function(error, status) {
-                    noty({text: 'bad @handle', layout: 'center', type: 'error', theme: 'defaultTheme'});
+                request.fail(function (error, status) {
+                    toastr.options.positionClass = 'toast-bottom-center';
+                    toastr.error('bad @handle', 'uh oh');
                     shelf.user.isLoading = false;
                 });
             }
@@ -60,8 +61,9 @@ define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'prettifier'], 
                     shelf.user.isLoading = false;
                 });
                 request.fail(function(error, status) {
-                    console.log(error);
-                    console.log(status);
+                    toastr.options.positionClass = 'toast-bottom-center';
+                    toastr.error('bad @handle', 'uh oh');
+                    shelf.user.isLoading = false;
                 });
             }
 

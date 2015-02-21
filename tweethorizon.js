@@ -42,7 +42,9 @@ io.on('connection', function (socket) {
     function sendLeaderBoard(board){
         socket.emit('leaderBoard', { leaderBoard: board });
     }
-    leaderBoard.getInstance().getLeaderBoard(sendLeaderBoard);
+    leaderBoard.getInstance().getLeaderBoard().then(function(board){
+        sendLeaderBoard(board);
+    });
 });
 
 module.exports = app;

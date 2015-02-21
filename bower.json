@@ -7,11 +7,11 @@
   ],
   "dependencies": {
     "jquery": null,
-    "skeleton": null,
     "requirejs": null,
     "rivets": null,
     "watch": null,
-    "noty": null,
-    "socket.io-client": null
+    "socket.io-client": null,
+    "skeleton": null,
+    "toastr": null
   }
 }

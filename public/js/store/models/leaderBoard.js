@@ -20,9 +20,12 @@ define(function (require) {
             setOfLeaders = sort(setOfLeaders);
             if(setOfLeaders !== undefined && setOfLeaders.length > 0){
                 for(var i=0; i<setOfLeaders.length; i++){
-                    leaderBoard[i]._id = setOfLeaders[i]._id;
-                    leaderBoard[i].handle = setOfLeaders[i].handle;
-                    leaderBoard[i].score = prettifier.getInstance().numberWithCommas(setOfLeaders[i].score);
+                    for(var prop in getLeaderModel()){
+                        if(setOfLeaders[i][prop] !== undefined) {
+                            leaderBoard[i][prop] = setOfLeaders[i][prop];
+                        }
+                    }
+                    leaderBoard[i].score = prettifier.getInstance().numberWithCommas(leaderBoard[i].score);
                     leaderBoard[i].show = true;
                 }
             }

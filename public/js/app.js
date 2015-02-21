@@ -3,17 +3,16 @@ require.config({
     paths: {
         jquery: '../lib/jquery/dist/jquery.min',
         watch: '../lib/watch/src/watch.min',
+        socketio: '../lib/socket.io-client/socket.io',
         userModel: '../js/store/models/user',
         leaderModel: '../js/store/models/leader',
         leaderBoardModel: '../js/store/models/leaderBoard',
         modelStore: '../js/store/store',
         picLoader: '../js/view/picLoader',
-        noty: '../lib/noty/js/noty/packaged/jquery.noty.packaged.min',
-        socketio: '../lib/socket.io-client/socket.io',
+        toastr: '../lib/toastr/toastr.min',
         prettifier: '../js/util/prettifier'
     }
 });
-
 require(
     [
         'jquery',
