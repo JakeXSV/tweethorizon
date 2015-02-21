@@ -1,10 +1,16 @@
 "use strict";
-define('modelStore', ['jquery', 'userModel', 'leaderBoardModel', 'toastr', 'prettifier'], function ($, getUserModel, getLeaderBoardModel, toastr, prettifier) {
+define('modelStore', ['jquery', 'socketio', 'userModel', 'leaderBoardModel', 'toastr', 'prettifier'], function ($, socketio, getUserModel, getLeaderBoardModel, toastr, prettifier) {
 
     return (function () {
 
         var instance;
         function init() {
+
+            // Listen for leaderboard updates from server
+            var socket = socketio.connect(document.URL);
+            socket.on('leaderBoard', function (data) {
+                setLeaderBoard(data.leaderBoard);
+            });
 
             var shelf = {
                 user: getUserModel(),

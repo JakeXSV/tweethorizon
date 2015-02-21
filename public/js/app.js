@@ -17,16 +17,9 @@ require(
     [
         'jquery',
         'modelStore',
-        'picLoader',
-        'socketio'
+        'picLoader'
     ],
-    function($, modelStore, picLoader, socketio) {
-
-        // Listen for leaderboard updates from server
-        var socket = socketio.connect(document.URL);
-        socket.on('leaderBoard', function (data) {
-            modelStore.getInstance().setLeaderBoard(data.leaderBoard);
-        });
+    function($, modelStore, picLoader) {
 
         // Bind view components to models in store
         bindElementsToUserModel(['inputRow','followers','retweets', 'favorites', 'horizon']);
