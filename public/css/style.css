@@ -386,6 +386,10 @@ body.IE7 .Switch.Round { width: 1px; }
     clear: both;
 }
 
+td, th, tr{
+    text-align:center;
+}
+
 /*Opera Fix*/
 body:before { /* thanks to Maleika (Kohoutec)*/
     content: "";
