@@ -19,7 +19,6 @@
     "nedb": "*",
     "socket.io": "*",
     "promise": "*",
-    "amdefine": "*",
     "assert": "*",
     "should": "*",
     "it": "*"

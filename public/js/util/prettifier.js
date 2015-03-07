@@ -1,5 +1,5 @@
 "use strict";
-define('prettifier', [], function () {
+define('prettifier', function () {
     return (function () {
         var instance;
         function init() {

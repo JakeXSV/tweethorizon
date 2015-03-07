@@ -1,12 +1,7 @@
 "use strict";
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
-}
-define(function (require) {
+define('leaderBoardModel', ['leaderModel', 'prettifier'], function (getLeaderModel, prettifier) {
     return function(testing){
 
-        var prettifier = require('prettifier');
-        var getLeaderModel = require('leaderModel');
         var leaderBoardSize = 5;
         var leaderBoard = [];
         for(var i=0; i<leaderBoardSize; i++){
