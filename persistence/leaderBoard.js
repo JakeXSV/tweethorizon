@@ -7,7 +7,7 @@ var leaderBoard = (function () {
         var Promise = require('promise');
         var db = new DataStore();
         var leaderBoardSize = 5;
-        var socketio = undefined;
+        var socketio;
 
         function boardChangedHandler(){
             if(socketio !== undefined){
@@ -40,7 +40,7 @@ var leaderBoard = (function () {
                                 insertLeader(user).then(function () {
                                     boardChangedHandler();
                                     fulfill(true);
-                                })
+                                });
                             }
                         });
                     } else{

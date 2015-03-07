@@ -1,6 +1,5 @@
-"use strict";
 define('modelStore', ['jquery', 'socketio', 'userModel', 'leaderBoardModel', 'toastr', 'prettifier'], function ($, socketio, getUserModel, getLeaderBoardModel, toastr, prettifier) {
-
+    'use strict';
     return (function () {
 
         var instance;
@@ -47,7 +46,7 @@ define('modelStore', ['jquery', 'socketio', 'userModel', 'leaderBoardModel', 'to
                     shelf.user.imagePath = e;
                     getHorizonScore();
                 });
-                request.fail(function (error, status) {
+                request.fail(function () {
                     toastr.options.positionClass = 'toast-bottom-center';
                     toastr.error('bad @handle', 'uh oh');
                     shelf.user.isLoading = false;
@@ -66,7 +65,7 @@ define('modelStore', ['jquery', 'socketio', 'userModel', 'leaderBoardModel', 'to
                     shelf.user.horizonObtained = true;
                     shelf.user.isLoading = false;
                 });
-                request.fail(function(error, status) {
+                request.fail(function() {
                     toastr.options.positionClass = 'toast-bottom-center';
                     toastr.error('bad @handle', 'uh oh');
                     shelf.user.isLoading = false;

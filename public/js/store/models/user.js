@@ -1,5 +1,5 @@
-"use strict";
 define('userModel', function () {
+    'use strict';
     return function(){
         return {
             handle: undefined,
@@ -10,6 +10,6 @@ define('userModel', function () {
             score: undefined,
             isLoading: false,
             horizonObtained: false
-        }
+        };
     };
 });

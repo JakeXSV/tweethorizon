@@ -7,21 +7,23 @@
     "postinstall": "bower install"
   },
   "dependencies": {
-    "express": "~4.9.0",
+    "TwitterJSClient": "BoyCook/TwitterJSClient",
+    "assert": "*",
     "body-parser": "~1.8.1",
+    "bower": "*",
     "cookie-parser": "~1.3.3",
-    "morgan": "~1.3.0",
-    "serve-favicon": "~2.1.3",
     "debug": "~2.0.0",
     "ejs": "*",
-    "TwitterJSClient": "BoyCook/TwitterJSClient",
-    "bower": "*",
+    "express": "~4.9.0",
+    "gulp": "*",
+    "gulp-jshint": "^1.9.2",
+    "it": "*",
+    "morgan": "~1.3.0",
     "nedb": "*",
-    "socket.io": "*",
     "promise": "*",
-    "assert": "*",
+    "serve-favicon": "~2.1.3",
     "should": "*",
-    "it": "*"
+    "socket.io": "*"
   },
   "engines": {
     "node": "*"

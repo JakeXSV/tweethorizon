@@ -1,5 +1,5 @@
-"use strict";
 define('leaderModel', function () {
+    'use strict';
     return function(){
         return {
             type: "leaderModel",
@@ -7,6 +7,6 @@ define('leaderModel', function () {
             handle: undefined,
             score: undefined,
             show: false
-        }
+        };
     };
 });

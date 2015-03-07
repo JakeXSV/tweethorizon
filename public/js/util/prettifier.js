@@ -1,5 +1,5 @@
-"use strict";
 define('prettifier', function () {
+    'use strict';
     return (function () {
         var instance;
         function init() {
@@ -9,7 +9,7 @@ define('prettifier', function () {
             }
             return {
                 numberWithCommas: numberWithCommas
-            }
+            };
         }
 
         return {

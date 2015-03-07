@@ -1,5 +1,5 @@
-"use strict";
 define('leaderBoardModel', ['leaderModel', 'prettifier'], function (getLeaderModel, prettifier) {
+    'use strict';
     return function(testing){
 
         var leaderBoardSize = 5;
@@ -33,7 +33,7 @@ define('leaderBoardModel', ['leaderModel', 'prettifier'], function (getLeaderMod
                 if(sortedData.length > 0){
                     var added = false;
                     for(var i=0; i<sortedData.length; i++){
-                        if(unsortedElement.score < sortedData[i]['score']){
+                        if(unsortedElement.score < sortedData[i].score){
                             if(!added){
                                 sortedData.splice(i, 0, unsortedElement);
                                 i++;

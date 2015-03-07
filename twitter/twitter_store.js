@@ -1,16 +1,17 @@
+"use strict";
 function TwitterStore(){
-     this.config = {
-         "consumerKey": process.env.consumerKey,
-         "consumerSecret": process.env.consumerSecret,
-         "accessToken": process.env.accessToken,
-         "accessTokenSecret": process.env.accessTokenSecret,
-         "callBackUrl": process.env.callBackUrl
-     };
+    this.config = {
+        "consumerKey": "abc",
+        "consumerSecret": "abc",
+        "accessToken": "abc",
+        "accessTokenSecret": "abc",
+        "callBackUrl": "http://yourtwitterregisteredappcallbackurl.com"
+    };
     this.api = new (require('twitter-js-client')).Twitter(this.config);
 }
 
 TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
-    var error = function (err, response, body) {
+    var error = function (err) {
         console.log(err);
         callback(undefined);
     };
@@ -19,7 +20,7 @@ TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
             var dataObj = JSON.parse(data);
             var user = dataObj[0].user;
             if (user !== null && user !== undefined) {
-                callback(user['profile_image_url']);
+                callback(user.profile_image_url);
             } else {
                 callback(undefined);
             }
@@ -31,7 +32,7 @@ TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
 };
 
 TwitterStore.prototype.getTimeline = function(handle, callback){
-    var error = function (err, response, body) {
+    var error = function (err) {
         console.log(err);
         callback(undefined);
     };
