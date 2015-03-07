@@ -1,5 +1,5 @@
 "use strict";
-require('app', ['jquery', 'modelStore', 'picLoader'], function($, modelStore, picLoader) {
+require(['jquery', 'modelStore', 'picLoader'], function($, modelStore, picLoader) {
 
     // Bind view components to models in store
     bindElementsToUserModel(['inputRow','followers','retweets', 'favorites', 'horizon']);
