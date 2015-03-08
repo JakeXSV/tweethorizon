@@ -1,11 +1,11 @@
 "use strict";
 function TwitterStore(){
     this.config = {
-        "consumerKey": "abc",
-        "consumerSecret": "abc",
-        "accessToken": "abc",
-        "accessTokenSecret": "abc",
-        "callBackUrl": "http://yourtwitterregisteredappcallbackurl.com"
+        "consumerKey": process.env.consumerKey,
+        "consumerSecret": process.env.consumerSecret,
+        "accessToken": process.env.accessToken,
+        "accessTokenSecret": process.env.accessTokenSecret,
+        "callBackUrl": process.env.callBackUrl
     };
     this.api = new (require('twitter-js-client')).Twitter(this.config);
 }
