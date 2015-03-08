@@ -6,8 +6,8 @@ find out your social reach on twitter, compare your score to your friends
 ## Build steps
 * Install [nodejs](http://nodejs.org/), [bower](http://bower.io/), and [gulp](http://gulpjs.com/).
 * Open terminal and navigate to source code directory
-* Command 'npm install'
-* Open the file 'twitter/twitter_store.js'
+* Command ```npm install```
+* Open the file ```twitter/twitter_store.js```
 * Fill in config object
 ```js
      this.config = {
@@ -19,8 +19,16 @@ find out your social reach on twitter, compare your score to your friends
      };
 ```
 * Command 'node tweethorizon.js'
-* Open web browser to 'http://localhost:3000' and wala
-* Open web browser to 'http://localhost:3000/dev' for dev environment (preminified/dist files)
+* Open web browser to ```http://localhost:3000``` and wala
+* Open web browser to ```http://localhost:3000/dev``` for dev environment (preminified files)
+
+## Dev (client side ./public/*)
+* Perform steps above
+* Make code changes
+* Navigate to root dir of project
+* Command ```gulp build```
+* Open web browser to ```http://localhost:3000``` and wala
+* Open web browser to ```http://localhost:3000/dev``` for dev environment (preminified files)
 
 ## Run tests
 * Open terminal and navigate to source code directory
