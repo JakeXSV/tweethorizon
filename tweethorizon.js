@@ -21,8 +21,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api', api);
-app.use('/', function(req, res){
+app.use('/dev', function(req, res){
     res.sendFile(path.join(__dirname,'/public/views/index.html'));
+});
+app.use('/', function(req, res){
+    res.sendFile(path.join(__dirname,'/public/dist/views/index.html'));
 });
 app.use(function(req, res) {
     res.status(404).end();
