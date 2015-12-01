@@ -3,6 +3,7 @@
 
 ### Bower Deps ###
 public/lib
+public/dist
 
 ### Node ###
 # Logs

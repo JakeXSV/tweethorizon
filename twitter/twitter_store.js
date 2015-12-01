@@ -7,7 +7,7 @@ function TwitterStore(){
         "accessTokenSecret": process.env.accessTokenSecret,
         "callBackUrl": process.env.callBackUrl
     };
-    this.api = new (require('twitter-js-client')).Twitter(this.config);
+    this.api = new (require('twitter-node-client')).Twitter(this.config);
 }
 
 TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
