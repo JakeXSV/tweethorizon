@@ -1,7 +1,6 @@
 "use strict";
 var twitterApi = new(require('../twitter/twitter_store.js'))();
-var Leaderboard = require('../persistence/leaderBoard');
-var HorizonCalc = require('../util/horizon_calc');
+var HorizonCalc = require('../twitter/horizon_calc');
 var express = require('express');
 var router = express.Router();
 
@@ -19,7 +18,6 @@ router.get('/:handle/score', function(req, res) {
 
     function getStats(timeline) {
         var stats = HorizonCalc.getInstance().calculateStatsByTimeline(timeline, handle);
-        Leaderboard.getInstance().sync(handle, stats.horizon.score);
         res.json(stats);
     }
 });

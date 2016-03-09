@@ -1,5 +1,4 @@
 var HorizonCalc = (function () {
-    'use strict';
     var instance;
 
     function init() {
