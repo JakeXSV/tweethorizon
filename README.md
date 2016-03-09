@@ -20,33 +20,5 @@ find out your social reach on twitter, compare your score to your friends
 ```
 * Command 'node tweethorizon.js'
 * Open web browser to ```http://localhost:3000``` and wala
-* Open web browser to ```http://localhost:3000/dev``` for dev environment (preminified files)
-
-## Dev (client side ./public/*)
-* Perform steps above
-* Make code changes
-* Navigate to root dir of project
-* Command ```gulp build```
-* Open web browser to ```http://localhost:3000``` and wala
-* Open web browser to ```http://localhost:3000/dev``` for dev environment (preminified files)
-
-## Run tests
-* Open terminal and navigate to source code directory
-* Command 'node tests/clientTests.js'
-* Command 'node tests/serverTests.js'
 
 ## Frameworks Used
-**Frontend**  
-[RequireJS](http://requirejs.org/) - AMD loader  
-[Rivets](http://rivetsjs.com/) - Data binding & templating  
-[WatchJS](https://github.com/melanke/Watch.JS/) - Observers  
-**Backend**  
-[NodeJS](http://nodejs.org/) - App platform  
-[Express](http://expressjs.com/) - Web app framework  
-[TwitterJSClient](https://github.com/BoyCook/TwitterJSClient) - Twitter API  
-[nedb](https://github.com/louischatriot/nedb) - in memory database  
-**Shared**  
-[socket.io](http://socket.io/) - real time sync of leaderboards between all users  
-**Tools**  
-[bower](http://bower.io/) - client side package management  
-[gulp](http://gulpjs.com/) - build system - minification, manipulating files, linting

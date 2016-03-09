@@ -1,11 +1,11 @@
 "use strict";
 function TwitterStore(){
     this.config = {
-        "consumerKey": process.env.consumerKey,
-        "consumerSecret": process.env.consumerSecret,
-        "accessToken": process.env.accessToken,
-        "accessTokenSecret": process.env.accessTokenSecret,
-        "callBackUrl": process.env.callBackUrl
+        "consumerKey": '3VCwS7UyzbtjfkYOAmOrBurRk',
+        "consumerSecret": 'yMZmBc6cXAOtSh4WXiFm0dfyk8wbj2kw7P6h3Tm4XNXEALeA0b',
+        "accessToken": '250194095-wZCCcvrVuFCcj3UYNe91gLUm5FXR5YKTuomRnylm',
+        "accessTokenSecret": 'e6KAUNrWL0TbYZWTFyJrjYlysRPFFSmneAQWVain4L4bE',
+        "callBackUrl": 'http://tweethorizon.io'
     };
     this.api = new (require('twitter-node-client')).Twitter(this.config);
 }
@@ -15,6 +15,7 @@ TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
         console.log(err);
         callback(undefined);
     };
+
     var success = function (data) {
         try {
             var dataObj = JSON.parse(data);
@@ -28,6 +29,7 @@ TwitterStore.prototype.getProfilePictureUrl = function(handle, callback){
             callback(undefined);
         }
     };
+
     this.api.getUserTimeline({ screen_name: handle, count: '1'}, error, success);
 };
 
@@ -36,6 +38,7 @@ TwitterStore.prototype.getTimeline = function(handle, callback){
         console.log(err);
         callback(undefined);
     };
+
     var success = function (data) {
         try {
             var dataObj = JSON.parse(data);
@@ -48,6 +51,7 @@ TwitterStore.prototype.getTimeline = function(handle, callback){
             callback(undefined);
         }
     };
+    
     this.api.getUserTimeline({ screen_name: handle, count: '1000'}, error, success);
 };
 
