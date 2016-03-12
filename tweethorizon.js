@@ -22,22 +22,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api', api);
-app.use('/', function(req, res){
-    res.sendFile(path.join(__dirname,'/public/views/index.html'));
+app.use('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/public/views/index.html'));
 });
-app.use(function(req, res) {
+app.use(function (req, res) {
     res.status(404).end();
 });
 
 // Config
 app.set('port', process.env.PORT || 3000);
-var server = app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + server.address().port);
 });
 
 var io = require('socket.io')(server);
-io.on('connection', function (socket) {
-
-});
+io.on('connection', function (socket) {});
 
 module.exports = app;
