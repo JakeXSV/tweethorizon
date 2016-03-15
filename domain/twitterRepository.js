@@ -18,15 +18,11 @@ var TwitterRepository = (function () {
         };
 
         var success = function (data) {
-            try {
-                var dataObj = JSON.parse(data);
-                if (dataObj !== null && dataObj !== undefined) {
-                    onSuccess(dataObj);
-                } else {
-                    throw new Error('TwitterRepository.getTimeline - Invalid timeline response data.');
-                }
-            } catch (e) {
-                throw new Error(e);
+            var dataObj = JSON.parse(data);
+            if (dataObj !== null && dataObj !== undefined) {
+                onSuccess(dataObj);
+            } else {
+                throw new Error('TwitterRepository.getTimeline - Invalid timeline response data.');
             }
         };
 

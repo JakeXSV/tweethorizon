@@ -2,6 +2,9 @@
 
 var HandleStatService = (function () {
 
+    var TwitterRepository = require('../domain/twitterRepository');
+    var twitterRepo = new TwitterRepository();
+
     function isValidTweet(tweet, handle) {
         // Validate tweet was by user and not a retweet
         if (tweet && tweet.user && tweet.user.screen_name) {
@@ -41,9 +44,28 @@ var HandleStatService = (function () {
         return stats;
     }
 
+    function getScore(handle, onSuccess) {
+        if (handle === null || handle == undefined) {
+            throw new Error('HandleStatService.getScore - Bad argument');
+        }
+
+        if (typeof handle !== 'string' || handle.length <= 3) {
+            throw new Error('HandleStatService.getScore - Type argument');
+        }
+
+        var success = function (timeline) {
+            onSuccess(calculateStatsByTimeline(timeline, handle));
+        };
+
+        twitterRepo.getTimeline(handle, function (data) {
+            success(data);
+        });
+    }
+
     return {
         isValidTweet: isValidTweet,
-        calculateStatsByTimeline: calculateStatsByTimeline
+        calculateStatsByTimeline: calculateStatsByTimeline,
+        getScore: getScore
     };
 });
 
