@@ -37,7 +37,7 @@
     "disallowEmptyBlocks": true,
     "disallowSpacesInsideArrayBrackets": true,
     "disallowSpacesInsideParentheses": true,
-    "disallowDanglingUnderscores": true,
+    "disallowDanglingUnderscores": false,
     "requireCommaBeforeLineBreak": true,
     "disallowSpaceAfterPrefixUnaryOperators": true,
     "disallowSpaceBeforePostfixUnaryOperators": true,

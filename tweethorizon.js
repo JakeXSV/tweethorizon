@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var api = require('./routes/api');
+var LeaderboardRepository = require('./domain/leaderboardRepository');
 
 var app = express();
 
@@ -36,6 +37,9 @@ var server = app.listen(app.get('port'), function () {
 });
 
 var io = require('socket.io')(server);
-io.on('connection', function (socket) {});
+LeaderboardRepository.getInstance().registerSocket(io);
+io.on('connection', function (socket) {
+    console.log("Leaderboard Feed.");
+});
 
 module.exports = app;
