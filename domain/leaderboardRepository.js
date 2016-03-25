@@ -1,30 +1,18 @@
 "use strict";
 
 var LeaderboardRepository = (function () {
+
     var instance;
 
-    function init() {
+    function init(datastore) {
 
-        var Datastore = require('nedb');
-        var db = new Datastore();
+        var db = null;
 
-        var socket = null;
-        var countCache = 0;
-
-        function registerSocket(socketToRegister) {
-            socket = socketToRegister;
-        }
-
-        function emit() {
-            if (socket !== null) {
-                db.find({}, function (err, leaderboard) {
-                    if (err) {
-                        throw new Error(err);
-                    }
-
-                    socket.emit('leaderboard', leaderboard);
-                });
-            }
+        if (datastore) {
+            db = datastore
+        } else {
+            var Datastore = require('nedb');
+            db = new Datastore();
         }
 
         function get(onSuccess) {
@@ -34,6 +22,16 @@ var LeaderboardRepository = (function () {
                 }
 
                 onSuccess(leaderboard);
+            });
+        }
+
+        function add(user, onSuccess) {
+            db.insert({ handle: user.handle, score: user.score }, function (err, result) {
+                if (err) {
+                    throw new Error(err);
+                }
+
+                onSuccess();
             });
         }
 
@@ -60,42 +58,17 @@ var LeaderboardRepository = (function () {
             });
         }
 
-        function add(user, onSuccess) {
-            db.insert({ handle: user.handle, score: user.score }, function (err, result) {
-                if (err) {
-                    throw new Error(err);
-                }
-
-                onSuccess();
-            });
-        }
-
-        function update(handle, score) {
-            if (countCache < 2) {
-                add({ handle: handle, score: score}, function () {
-                    countCache++;
-                    emit();
-                });
-            } else {
-                dropLastPlace(function () {
-                    add({ handle: handle, score: score}, function () {
-                        emit();
-                    });
-                })
-            }
-        }
-
         return {
-            registerSocket: registerSocket,
             get: get,
-            update: update
+            add: add,
+            dropLastPlace: dropLastPlace,
         };
     };
 
     return {
-        getInstance: function () {
+        getInstance: function (datastore) {
             if (!instance) {
-                instance = init();
+                instance = init(datastore);
             }
             return instance;
         }
