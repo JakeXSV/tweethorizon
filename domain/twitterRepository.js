@@ -14,7 +14,7 @@ var TwitterRepository = (function () {
 
     function getTimeline(handle, onSuccess) {
         var error = function (err) {
-            throw new Error(err);
+            throw new Error(JSON.stringify(err));
         };
 
         var success = function (data) {
@@ -31,7 +31,7 @@ var TwitterRepository = (function () {
 
     function getProfilePictureUrl(handle, onSuccess) {
         var error = function (err) {
-            throw new Error(err);
+            throw new Error(JSON.stringify(err));
         };
 
         var success = function (data) {

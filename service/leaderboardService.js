@@ -17,7 +17,7 @@ var LeaderboardService = (function () {
 
     function emit() {
         if (socket !== null) {
-            LeaderboardRepository.getInstance().get(function() {
+            LeaderboardRepository.getInstance().get(function () {
                 socket.emit('leaderboard', leaderboard);
             })
         }

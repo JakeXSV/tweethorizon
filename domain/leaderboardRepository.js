@@ -61,7 +61,7 @@ var LeaderboardRepository = (function () {
         return {
             get: get,
             add: add,
-            dropLastPlace: dropLastPlace,
+            dropLastPlace: dropLastPlace
         };
     };
 
