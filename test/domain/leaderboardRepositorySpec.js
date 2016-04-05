@@ -7,7 +7,7 @@ chai.should();
 describe('LeaderboardRepository', function () {
     describe('get()', function () {
         it('should return empty dataset when datastore is empty.', function () {
-            var LeaderboardRepository = require('../../domain/LeaderboardRepository');
+            var LeaderboardRepository = require('../../domain/leaderboardRepository');
             LeaderboardRepository.getInstance().get(function (result) {
                 assert.deepEqual(result, []);
             });
@@ -20,7 +20,7 @@ describe('LeaderboardRepository', function () {
                 insertedDoc = result;
             });
 
-            var LeaderboardRepository = require('../../domain/LeaderboardRepository');
+            var LeaderboardRepository = require('../../domain/leaderboardRepository');
             LeaderboardRepository.getInstance(db).get(function (result) {
                 assert.deepEqual(result, [insertedDoc]);
             });
