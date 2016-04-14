@@ -23,6 +23,10 @@ var LeaderboardService = (function () {
         }
     }
 
+    function get(onSuccess) {
+        LeaderboardRepository.getInstance().get(onSuccess);
+    }
+
     function update(handle, score) {
         if (countCache < 2) {
             LeaderboardRepository.getInstance().add({ handle: handle, score: score}, function () {
