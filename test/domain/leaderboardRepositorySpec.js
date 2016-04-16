@@ -15,14 +15,11 @@ describe('LeaderboardRepository', function () {
         it('should return data correctly (1).', function () {
             var Datastore = require('nedb');
             db = new Datastore();
-            var insertedDoc = null;
-            db.insert({id: 1, data: "seoifj"}, function (err, result) {
-                insertedDoc = result;
-            });
-
-            var LeaderboardRepository = require('../../domain/leaderboardRepository');
-            LeaderboardRepository.getInstance(db).get(function (result) {
-                assert.deepEqual(result, [insertedDoc]);
+            db.insert({id: 1, data: "seoifj"}, function (err, insertResult) {
+                var LeaderboardRepository = require('../../domain/leaderboardRepository');
+                LeaderboardRepository.getInstance(db).get(function (getResult) {
+                    assert.deepEqual([insertResult], getResult);
+                });
             });
         });
     });
