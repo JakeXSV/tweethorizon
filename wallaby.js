@@ -12,6 +12,11 @@ module.exports = function (wallaby) {
         env: {
             type: 'node',
             runner: 'node'
+        },
+        workers: {
+            initial: 6,
+            regular: 2,
+            recycle: true
         }
     };
 };
