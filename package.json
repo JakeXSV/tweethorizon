@@ -9,21 +9,27 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
-    "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
     "debug": "^2.2.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
-    "jscs": "^3.0.3",
-    "mocha": "^2.4.5",
     "morgan": "^1.7.0",
     "nedb": "^1.8.0",
     "serve-favicon": "^2.3.0",
-    "sinon": "^1.17.3",
     "socket.io": "^1.4.5",
     "twitter-node-client": "0.0.6"
   },
   "engines": {
     "node": "*"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "jscs": "^3.0.3",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
   }
 }
