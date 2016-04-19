@@ -2,7 +2,7 @@
 
 var LeaderboardRepository = (function () {
 
-    var instance;
+    var instance = undefined;
 
     function init(datastore) {
 
@@ -67,7 +67,7 @@ var LeaderboardRepository = (function () {
 
     return {
         getInstance: function (datastore) {
-            if (!instance) {
+            if (instance === undefined || datastore !== undefined) {
                 instance = init(datastore);
             }
             return instance;
