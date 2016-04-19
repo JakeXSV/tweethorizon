@@ -31,7 +31,7 @@ var LeaderboardRepository = (function () {
                     throw new Error(err);
                 }
 
-                onSuccess();
+                onSuccess(result);
             });
         }
 
