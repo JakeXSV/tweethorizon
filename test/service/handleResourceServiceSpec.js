@@ -3,8 +3,8 @@ var chai = require('chai');
 var assert = chai.assert;
 var expect = chai.expect;
 var should = chai.should();
-var LeaderboardRepository = require('../../domain/twitterRepository');
+var HandleResourceService = require('../../service/handleResourceService');
 
-describe('TwitterRepository', function () {
+describe('HandleResourceService', function () {
 
 });
